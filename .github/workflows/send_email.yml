@@ -1,6 +1,8 @@
 name: Send Email
 
 on:
+  schedule:
+    - cron: "0 23 * * *"  # Runs at 11:00 PM UTC (Ireland time)
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
@@ -21,7 +23,7 @@ jobs:
 
       - name: Run email script
         env:
-          SEMAIL: ${{ secrets.SEMAIL }}  # Sender email
-          REMAIL: ${{ secrets.REMAIL }}  # Receiver email
-          PASS: ${{ secrets.PASS }}      # Password or App Password
+          SEMAIL: ${{ secrets.SEMAIL }}
+          REMAIL: ${{ secrets.REMAIL }}
+          PASS: ${{ secrets.PASS }}
         run: python send_email.py
