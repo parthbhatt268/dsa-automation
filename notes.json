@@ -1,5 +1,23 @@
 [
   {
+    "date": "2025-01-11",
+    "title": "Heap",
+    "question": "Explain the types of heaps and how Python implements max heap using min heap.",
+    "dsa_solution": null,
+    "notes": [
+      "Two types: Min Heap and Max Heap.",
+      "Python doesn't have max heap natively, so we use a trick by inverting signs to mimic max heap.",
+      "Heapify operation: O(n)",
+      "Add/remove element: O(log n)",
+      "Find min/max: O(1)"
+    ],
+    "example": {
+      "input": "stones = [-s for s in stones]",
+      "output": "Max heap created with negative values."
+    },
+    "link": null
+  },
+  {
     "date": "2025-01-12",
     "title": "Heap",
     "question": "Explain the types of heaps and how Python implements max heap using min heap.",
