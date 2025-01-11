@@ -1,0 +1,13 @@
+[
+  {
+    "date": "2025-01-11",
+    "title": "Binary Search",
+    "dsa_solution": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1",
+    "notes": [
+      "Binary search is efficient for sorted arrays.",
+      "Time complexity: O(log n).",
+      "Space complexity: O(1).",
+      "Handle edge cases like empty arrays and targets not found in the array."
+    ]
+  }
+]
