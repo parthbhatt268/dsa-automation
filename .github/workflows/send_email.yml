@@ -21,6 +21,7 @@ jobs:
 
       - name: Run email script
         env:
-          EMAIL: ${{ secrets.EMAIL }}
-          PASS: ${{ secrets.PASS }}
+          SEMAIL: ${{ secrets.SEMAIL }}  # Sender email
+          REMAIL: ${{ secrets.REMAIL }}  # Receiver email
+          PASS: ${{ secrets.PASS }}      # Password or App Password
         run: python send_email.py
