@@ -50,7 +50,7 @@ def send_email(subject, content):
 
 def main():
     # Debug: Print the environment variables to ensure they're being passed
-    print(f"DUMMYSEMAIL: {EMAIL_ADDRESS}")  # Debug: Should print the sender email address
+    print(EMAIL_ADDRESS)  # Debug: Should print the sender email address
     print(f"DUMMYREMAIL: {RECIPIENT_EMAIL}")  # Debug: Should print the recipient email address
     print(f"DUMMYPASS: {EMAIL_PASSWORD}")  # Debug: Should print the email password (App Password)
 
