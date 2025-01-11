@@ -48,10 +48,10 @@ def send_email(subject, content):
         server.send_message(msg)
 
 def main():
-    print(f"EMAIL_ADDRESS: {EMAIL_ADDRESS}")  # Debug: Should print the sender email address
-    print(f"RECIPIENT_EMAIL: {RECIPIENT_EMAIL}")  # Debug: Should print the recipient email address
-    if not EMAIL_PASSWORD:
-        print("EMAIL_PASSWORD is not set")  # Debug: Check if password is missing
+    # Debug: Print the environment variables to ensure they're being passed
+    print(f"DUMMYSEMAIL: {EMAIL_ADDRESS}")  # Debug: Should print the sender email address
+    print(f"DUMMYREMAIL: {RECIPIENT_EMAIL}")  # Debug: Should print the recipient email address
+    print(f"DUMMYPASS: {EMAIL_PASSWORD}")  # Debug: Should print the email password (App Password)
 
     # Load the notes from the JSON file
     notes = load_notes(JSON_FILE_PATH)
