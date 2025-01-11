@@ -23,6 +23,8 @@ def find_todays_notes(notes):
 def format_email_content(note):
     email_content = f"""
     <h1>{note['title']}</h1>
+    <h2>Question</h2>
+    <p>{note.get('question', 'No question provided.')}</p>
     <h2>DSA Solution</h2>
     <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px;">
 {note['dsa_solution']}
@@ -33,6 +35,20 @@ def format_email_content(note):
     for line in note['notes']:
         email_content += f"<li>{line}</li>\n"
     email_content += "</ul>"
+
+    if note.get('example'):
+        email_content += f"""
+        <h2>Example</h2>
+        <p><strong>Input:</strong> {note['example']['input']}</p>
+        <p><strong>Output:</strong> {note['example']['output']}</p>
+        """
+
+    if note.get('link'):
+        email_content +=f"""
+        <h2>Reference Link</h2>
+        <p><a href="{note['link']}">{note['link']}</a></p>
+        """
+
     return email_content
 
 def send_email(subject, content):
