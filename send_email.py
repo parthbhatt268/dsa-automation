@@ -8,7 +8,7 @@ JSON_FILE_PATH = 'notes.json'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 EMAIL_ADDRESS = 'parthril12@gmail.com'
-EMAIL_PASSWORD = 'Brendan@1234'
+EMAIL_PASSWORD = 'bpsl ilop ioov mmto'
 RECIPIENT_EMAIL = 'pb31286@gmail.com'
 
 def load_notes(file_path):
