@@ -7,9 +7,9 @@ from email.mime.text import MIMEText
 JSON_FILE_PATH = 'notes.json'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
-EMAIL_ADDRESS = os.environ.get('SEMAIL')
-EMAIL_PASSWORD = os.environ.get('PASS')
-RECIPIENT_EMAIL = os.environ.get('REMAIL')
+EMAIL_ADDRESS = 'parthril12@gmail.com'
+EMAIL_PASSWORD = 'Brendan@1234'
+RECIPIENT_EMAIL = 'pb31286@gmail.com'
 
 def load_notes(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
