@@ -7,9 +7,9 @@ from email.mime.text import MIMEText
 JSON_FILE_PATH = 'notes.json'
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
-EMAIL_ADDRESS = 'parthril12@gmail.com'
-EMAIL_PASSWORD = 'bpsl ilop ioov mmto'
-RECIPIENT_EMAIL = 'pb31286@gmail.com'
+EMAIL_ADDRESS = os.environ.get('SEMAIL')
+EMAIL_PASSWORD = os.environ.get('PASS')
+RECIPIENT_EMAIL = os.environ.get('REMAIL')
 
 def load_notes(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -19,7 +19,6 @@ def find_todays_notes(notes):
     for note in notes:
         return note
     return None
-
 
 def format_email_content(note):
     email_content = f"""
@@ -49,22 +48,10 @@ def send_email(subject, content):
         server.send_message(msg)
 
 def main():
-    # Debug: Print the environment variables to ensure they're being passed
-    print(EMAIL_ADDRESS)  # Debug: Should print the sender email address
-    print(f"DUMMYREMAIL: {RECIPIENT_EMAIL}")  # Debug: Should print the recipient email address
-    print(f"DUMMYPASS: {EMAIL_PASSWORD}")  # Debug: Should print the email password (App Password)
-
-    # Load the notes from the JSON file
     notes = load_notes(JSON_FILE_PATH)
-    
-    # Find today's note (or the first one for testing purposes)
     todays_note = find_todays_notes(notes)
-    
     if todays_note:
-        # Format the email content
         email_content = format_email_content(todays_note)
-        
-        # Send the email
         send_email(f"DSA Notes: {todays_note['title']}", email_content)
         print("Email sent successfully!")
     else:
