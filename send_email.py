@@ -20,6 +20,7 @@ def find_todays_notes(notes):
         return note
     return None
 
+
 def format_email_content(note):
     email_content = f"""
     <h1>{note['title']}</h1>
