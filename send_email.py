@@ -16,8 +16,10 @@ def load_notes(file_path):
         return json.load(f)
 
 def find_todays_notes(notes):
+    today = datetime.now().strftime("%Y-%m-%d")
     for note in notes:
-        return note
+        if note.get('date') == today:
+            return note
     return None
 
 def format_email_content(note):
