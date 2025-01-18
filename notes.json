@@ -36,7 +36,7 @@
     "link": null
   },
   {
-    "date": "2025-01-13",
+    "date": "2025-01-18",
     "title": "Median from a Data Stream",
     "question": "Design a data structure to add numbers and find the median efficiently.",
     "dsa_solution": "class MedianFinder:\n\n    def __init__(self):\n        self.data = []\n\n    def addNum(self, num: int) -> None:\n        self.data.append(num)\n\n    def findMedian(self) -> float:\n        self.data.sort()\n        n = len(self.data)\n        return self.data[n//2] if n&1 else (self.data[n//2] + self.data[n//2-1])/2",
@@ -51,7 +51,7 @@
     "link": "https://leetcode.com/problems/find-median-from-data-stream/"
   },
   {
-    "date": "2025-01-14",
+    "date": "2025-01-19",
     "title": "K-th Largest Element in a Stream",
     "question": "Design a class to find the k-th largest element in a stream.",
     "dsa_solution": "class KthLargest:\n\n    def __init__(self, k: int, nums: List[int]):\n        self.minHeap, self.k = nums, k\n        heapq.heapify(self.minHeap)\n        while len(self.minHeap) > k:\n            heapq.heappop(self.minHeap)\n\n    def add(self, val: int) -> int:\n        heapq.heappush(self.minHeap, val)\n        if len(self.minHeap) > self.k:\n            heapq.heappop(self.minHeap)\n        return self.minHeap[0]",
@@ -66,7 +66,7 @@
     "link": "https://leetcode.com/problems/kth-largest-element-in-a-stream/"
   },
   {
-    "date": "2025-01-15",
+    "date": "2025-01-20",
     "title": "Last Stone Weight",
     "question": "Simulate the process of smashing stones, returning the weight of the last stone.",
     "dsa_solution": "class Solution:\n    def lastStoneWeight(self, stones: List[int]) -> int:\n        stones = [-s for s in stones]\n        heapq.heapify(stones)\n\n        while len(stones) > 1:\n            first = heapq.heappop(stones)\n            second = heapq.heappop(stones)\n            if second > first:\n                heapq.heappush(stones, first - second)\n\n        stones.append(0)\n        return abs(stones[0])",
@@ -81,7 +81,7 @@
     "link": "https://leetcode.com/problems/last-stone-weight/"
   },
   {
-    "date": "2025-01-16",
+    "date": "2025-01-21",
     "title": "K Closest Points to Origin",
     "question": "Find the k closest points to the origin (0,0) in a 2D plane.",
     "dsa_solution": "class Solution:\n    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:\n        minHeap = []\n\n        for x, y in points:\n            dist = x ** 2 + y ** 2\n            minHeap.append([dist, x, y])\n\n        heapq.heapify(minHeap)\n        res = []\n        while k > 0:\n            dist, x, y = heapq.heappop(minHeap)\n            res.append([x,y])\n            k -= 1\n        \n        return res",
@@ -96,7 +96,7 @@
     "link": "https://leetcode.com/problems/k-closest-points-to-origin/"
   },
   {
-    "date": "2025-01-17",
+    "date": "2025-01-22",
     "title": "Find K-th Largest Element",
     "question": "Return the k-th largest element in an array.",
     "dsa_solution": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        nums = [-i for i in nums]\n        heapq.heapify(nums)\n\n        res = 0\n        while k > 0:\n            res = heapq.heappop(nums)\n            k -= 1\n        return res * -1",
