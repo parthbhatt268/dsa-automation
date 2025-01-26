@@ -6,7 +6,7 @@
     "dsa_solution": null,
     "notes": [
       "Two types: Min Heap and Max Heap.",
-      "Python doesn't have max heap natively, so we use a trick by inverting signs to mimic max heap.",
+      "Python doesn't have max heap natively(so we what we do is,, we take minHeap and negate it), so we use a trick by inverting signs to mimic max heap.",
       "Heapify operation: O(n)",
       "Add/remove element: O(log n)",
       "Find min/max: O(1)"
