@@ -208,5 +208,101 @@
     "notes": ["Total sum must be even for a valid partition.", "Uses a set to track achievable subset sums dynamically."],
     "example": {"input": "nums = [1, 5, 11, 5]", "output": "true"},
     "link": "https://leetcode.com/problems/partition-equal-subset-sum"
+  },
+   {
+    "date": "2025-02-13",
+    "title": "Best Time to Buy and Sell Stock",
+    "question": "Find the maximum profit from buying and selling a stock given an array of prices.",
+    "dsa_solution": "class Solution:\n    def maxProfit(self, prices: List[int]) -> int:\n        l, r = 0, 1\n        maxProfit = 0\n\n        while r < len(prices):\n            if prices[r] > prices[l]:\n                profit = prices[r] - prices[l]\n                maxProfit = max(maxProfit, profit)\n            else:\n                l = r\n            r += 1\n\n        return maxProfit",
+    "notes": [
+      "Use two pointers: left for buying, right for selling.",
+      "Move left only when a smaller price is found.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "[7,1,5,3,6,4]",
+      "output": "5"
+    },
+    "link": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+  },
+  {
+    "date": "2025-02-14",
+    "title": "Longest Substring Without Repeating Characters",
+    "question": "Find the length of the longest substring without repeating characters.",
+    "dsa_solution": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        charSet = set()\n        l = 0\n        res = 0\n\n        for r in range(len(s)):\n            while s[r] in charSet:\n                charSet.remove(s[l])\n                l +=1\n            charSet.add(s[r])\n            res = max(res, len(charSet))\n        return res",
+    "notes": [
+      "Use a sliding window approach.",
+      "Use a set to track unique characters in the window.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "\"abcabcbb\"",
+      "output": "3"
+    },
+    "link": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+  },
+  {
+    "date": "2025-02-15",
+    "title": "Permutation in String",
+    "question": "Check if one string's permutation is a substring of another string.",
+    "dsa_solution": "class Solution:\n    def checkInclusion(self, s1: str, s2: str) -> bool:\n        n1, n2 = len(s1), len(s2)\n        if n1 > n2:\n            return False\n        s1Count, s2Count = {}, {}\n        for i in range(n1):\n            s1Count[s1[i]] = s1Count.get(s1[i], 0) + 1\n            s2Count[s2[i]] = s2Count.get(s2[i], 0) + 1\n        if s1Count == s2Count:\n            return True\n        for i in range(n1, n2):\n            new_char = s2[i]\n            s2Count[new_char] = s2Count.get(new_char, 0) + 1\n            old_char = s2[i - n1]\n            s2Count[old_char] -= 1\n            if s2Count[old_char] == 0:\n                del s2Count[old_char]\n            if s1Count == s2Count:\n                return True\n        return False",
+    "notes": [
+      "Use a sliding window and frequency dictionary.",
+      "Update the window dynamically.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "\"ab\", \"eidbaooo\"",
+      "output": "true"
+    },
+    "link": "https://leetcode.com/problems/permutation-in-string/"
+  },
+  {
+    "date": "2025-02-16",
+    "title": "Longest Repeating Character Replacement",
+    "question": "Find the length of the longest substring where k replacements allow all characters to be the same.",
+    "dsa_solution": "class Solution:\n    def characterReplacement(self, s: str, k: int) -> int:\n        count = {}\n        l = 0\n        res = 0\n        for r in range(len(s)):\n            count[s[r]] = count.get(s[r], 0) + 1\n            while (r - l + 1) - max(count.values()) > k:\n                count[s[l]] -= 1\n                l += 1\n            res = max(res, (r-l+1))\n        return res",
+    "notes": [
+      "Use a sliding window with a frequency dictionary.",
+      "Adjust the window size based on max frequency character.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "\"AABABBA\", 1",
+      "output": "4"
+    },
+    "link": "https://leetcode.com/problems/longest-repeating-character-replacement/"
+  },
+  {
+    "date": "2025-02-17",
+    "title": "Minimum Window Substring",
+    "question": "Find the minimum substring in s that contains all characters of t.",
+    "dsa_solution": "class Solution:\n    def minWindow(self, s: str, t: str) -> str:\n        if t == \"\": return \"\"\n        countT, window = {}, {}\n        for c in t:\n            countT[c] = countT.get(c, 0) + 1\n        have, need = 0, len(countT)\n        res, resLen = [-1, -1], float(\"inf\")\n        l = 0\n        for r in range(len(s)):\n            c = s[r]\n            window[c] = window.get(c, 0) + 1\n            if c in countT and window[c] == countT[c]:\n                have += 1\n            while have == need:\n                if (r - l + 1) < resLen:\n                    res = [l, r]\n                    resLen = (r - l + 1)\n                window[s[l]] -= 1\n                if s[l] in countT and window[s[l]] < countT[s[l]]:\n                    have -= 1\n                l += 1\n        l, r = res\n        return s[l:r+1] if resLen != float(\"inf\") else \"\"",
+    "notes": [
+      "Use sliding window with frequency dictionary.",
+      "Expand and contract the window dynamically.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "\"ADOBECODEBANC\", \"ABC\"",
+      "output": "\"BANC\""
+    },
+    "link": "https://leetcode.com/problems/minimum-window-substring/"
+  },
+  {
+    "date": "2025-02-18",
+    "title": "Sliding Window Maximum",
+    "question": "Find the maximum value in every window of size k in an array.",
+    "dsa_solution": "class Solution:\n    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:\n        output = []\n        q = deque()\n        l = r = 0\n        while r < len(nums):\n            while q and nums[q[-1]] < nums[r]:\n                q.pop()\n            q.append(r)\n            if l > q[0]:\n                q.popleft()\n            if (r + 1) >= k:\n                output.append(nums[q[0]])\n                l += 1\n            r += 1\n        return output",
+    "notes": [
+      "Use a monotonic queue (deque) to store indices.",
+      "Remove elements outside the window dynamically.",
+      "Time complexity: O(n)."
+    ],
+    "example": {
+      "input": "[1,3,-1,-3,5,3,6,7], k = 3",
+      "output": "[3,3,5,5,6,7]"
+    },
+    "link": "https://leetcode.com/problems/sliding-window-maximum/"
   }
 ]
