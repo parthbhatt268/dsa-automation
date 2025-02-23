@@ -1,6 +1,6 @@
 [
   {
-    "date": "2025-01-11",
+    "date": "2025-02-23",
     "title": "Heap",
     "question": "Explain the types of heaps and how Python implements max heap using min heap",
     "dsa_solution": null,
@@ -18,7 +18,7 @@
     "link": null
   },
   {
-    "date": "2025-01-12",
+    "date": "2025-02-24",
     "title": "Heap",
     "question": "Explain the types of heaps and how Python implements max heap using min heap.",
     "dsa_solution": null,
@@ -36,7 +36,7 @@
     "link": null
   },
   {
-    "date": "2025-01-18",
+    "date": "2025-02-25",
     "title": "Median from a Data Stream",
     "question": "Design a data structure to add numbers and find the median efficiently.",
     "dsa_solution": "class MedianFinder:\n\n    def __init__(self):\n        self.data = []\n\n    def addNum(self, num: int) -> None:\n        self.data.append(num)\n\n    def findMedian(self) -> float:\n        self.data.sort()\n        n = len(self.data)\n        return self.data[n//2] if n&1 else (self.data[n//2] + self.data[n//2-1])/2",
@@ -51,7 +51,7 @@
     "link": "https://leetcode.com/problems/find-median-from-data-stream/"
   },
   {
-    "date": "2025-01-19",
+    "date": "2025-02-26",
     "title": "K-th Largest Element in a Stream",
     "question": "Design a class to find the k-th largest element in a stream.",
     "dsa_solution": "class KthLargest:\n\n    def __init__(self, k: int, nums: List[int]):\n        self.minHeap, self.k = nums, k\n        heapq.heapify(self.minHeap)\n        while len(self.minHeap) > k:\n            heapq.heappop(self.minHeap)\n\n    def add(self, val: int) -> int:\n        heapq.heappush(self.minHeap, val)\n        if len(self.minHeap) > self.k:\n            heapq.heappop(self.minHeap)\n        return self.minHeap[0]",
@@ -66,7 +66,7 @@
     "link": "https://leetcode.com/problems/kth-largest-element-in-a-stream/"
   },
   {
-    "date": "2025-01-20",
+    "date": "2025-02-27",
     "title": "Last Stone Weight",
     "question": "Simulate the process of smashing stones, returning the weight of the last stone.",
     "dsa_solution": "class Solution:\n    def lastStoneWeight(self, stones: List[int]) -> int:\n        stones = [-s for s in stones]\n        heapq.heapify(stones)\n\n        while len(stones) > 1:\n            first = heapq.heappop(stones)\n            second = heapq.heappop(stones)\n            if second > first:\n                heapq.heappush(stones, first - second)\n\n        stones.append(0)\n        return abs(stones[0])",
@@ -81,7 +81,7 @@
     "link": "https://leetcode.com/problems/last-stone-weight/"
   },
   {
-    "date": "2025-01-21",
+    "date": "2025-02-28",
     "title": "K Closest Points to Origin",
     "question": "Find the k closest points to the origin (0,0) in a 2D plane.",
     "dsa_solution": "class Solution:\n    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:\n        minHeap = []\n\n        for x, y in points:\n            dist = x ** 2 + y ** 2\n            minHeap.append([dist, x, y])\n\n        heapq.heapify(minHeap)\n        res = []\n        while k > 0:\n            dist, x, y = heapq.heappop(minHeap)\n            res.append([x,y])\n            k -= 1\n        \n        return res",
@@ -96,7 +96,7 @@
     "link": "https://leetcode.com/problems/k-closest-points-to-origin/"
   },
   {
-    "date": "2025-01-22",
+    "date": "2025-03-01",
     "title": "Find K-th Largest Element",
     "question": "Return the k-th largest element in an array.",
     "dsa_solution": "class Solution:\n    def findKthLargest(self, nums: List[int], k: int) -> int:\n        nums = [-i for i in nums]\n        heapq.heapify(nums)\n\n        res = 0\n        while k > 0:\n            res = heapq.heappop(nums)\n            k -= 1\n        return res * -1",
@@ -111,7 +111,7 @@
     "link": "https://leetcode.com/problems/kth-largest-element-in-an-array/"
   },
   {
-    "date": "2025-01-26",
+    "date": "2025-03-02",
     "title": "Climbing Stairs",
     "question": "How many distinct ways can a person reach the nth step if they can jump 1 or 2 steps at a time?",
     "dsa_solution": "class Solution:\n    def climbStairs(self, n: int) -> int:\n        one, two = 1, 1\n\n        for i in range(n-1):\n            temp = one + two\n            two = one\n            one = temp\n\n        return one",
@@ -120,7 +120,7 @@
     "link": "https://leetcode.com/problems/climbing-stairs"
   },
   {
-    "date": "2025-01-27",
+    "date": "2025-03-03",
     "title": "Min Cost Climbing Stairs",
     "question": "Find the minimum cost to reach the top of the floor starting from either step 0 or 1.",
     "dsa_solution": "class Solution:\n    def minCostClimbingStairs(self, cost: List[int]) -> int:\n        cost.append(0)\n\n        for i in range(len(cost) - 3, -1, -1):\n            cost[i] = min(cost[i] + cost[i+1], cost[i] + cost[i+2])\n\n        return min(cost[0], cost[1])",
@@ -129,7 +129,7 @@
     "link": "https://leetcode.com/problems/min-cost-climbing-stairs"
   },
   {
-    "date": "2025-01-28",
+    "date": "2025-03-04",
     "title": "House Robber",
     "question": "Determine the maximum amount of money you can rob without alerting the police (adjacent houses).",
     "dsa_solution": "class Solution:\n    def rob(self, nums: List[int]) -> int:\n        rob1, rob2 = 0, 0\n\n        for n in nums:\n            newrob = max(rob1 + n, rob2)\n            rob1 = rob2\n            rob2 = newrob\n        \n        return rob2",
@@ -138,7 +138,7 @@
     "link": "https://leetcode.com/problems/house-robber"
   },
   {
-    "date": "2025-01-29",
+    "date": "2025-03-05",
     "title": "House Robber II",
     "question": "Same as House Robber but with houses arranged in a circle.",
     "dsa_solution": "class Solution:\n    def rob(self, nums: List[int]) -> int:\n        return max(nums[0], self.helper(nums[1:]), self.helper(nums[:-1]))\n    \n    def helper(self, houses):\n        rob1, rob2 = 0, 0\n        \n        for n in houses:\n            newrob = max(rob1 + n, rob2)\n            rob1 = rob2\n            rob2 = newrob\n        \n        return rob2",
@@ -147,7 +147,7 @@
     "link": "https://leetcode.com/problems/house-robber-ii"
   },
   {
-    "date": "2025-01-30",
+    "date": "2025-03-06",
     "title": "Longest Palindromic Substring",
     "question": "Find the longest substring that is a palindrome in a given string.",
     "dsa_solution": "class Solution:\n    def longestPalindrome(self, s: str) -> str:\n        res = \"\"\n        resLen = 0\n\n        for i in range(len(s)):\n            l, r = i, i\n            while l >= 0 and r < len(s) and s[l] == s[r]:\n                if (r - l + 1) > resLen:\n                    res = s[l : r + 1]\n                    resLen = r - l + 1\n                l -= 1\n                r += 1\n\n            l, r = i, i + 1\n            while l >= 0 and r < len(s) and s[l] == s[r]:\n                if (r - l + 1) > resLen:\n                    res = s[l : r + 1]\n                    resLen = r - l + 1\n                l -= 1\n                r += 1\n\n        return res",
@@ -156,7 +156,7 @@
     "link": "https://leetcode.com/problems/longest-palindromic-substring"
   },
   {
-    "date": "2025-01-31",
+    "date": "2025-03-07",
     "title": "Palindromic Substrings",
     "question": "Count the total number of palindromic substrings in a string.",
     "dsa_solution": "class Solution:\n    def countSubstrings(self, s: str) -> int:\n        res = 0\n\n        for i in range(len(s)):\n            res += self.countPali(s, i, i)\n            res += self.countPali(s, i, i + 1)\n        return res\n\n    def countPali(self, s, l, r):\n        res = 0\n        while l >= 0 and r < len(s) and s[l] == s[r]:\n            res += 1\n            l -= 1\n            r += 1\n        return res",
@@ -165,7 +165,7 @@
     "link": "https://leetcode.com/problems/palindromic-substrings"
   },
   {
-    "date": "2025-02-01",
+    "date": "2025-03-08",
     "title": "Decode Ways",
     "question": "Determine how many ways a string of digits can be decoded into letters (A-Z).",
     "dsa_solution": "class Solution:\n    def numDecodings(self, s: str) -> int:\n        dp = {len(s): 1}\n\n        def dfs(i):\n            if i in dp:\n                return dp[i]\n            if s[i] == \"0\":\n                return 0\n\n            res = dfs(i + 1)\n            if i + 1 < len(s) and (s[i] == \"1\" or s[i] == \"2\" and s[i + 1] in \"0123456\"):\n                res += dfs(i + 2)\n            dp[i] = res\n            return res\n\n        return dfs(0)",
@@ -174,7 +174,7 @@
     "link": "https://leetcode.com/problems/decode-ways"
   },
   {
-    "date": "2025-02-02",
+    "date": "2025-03-09",
     "title": "Coin Change",
     "question": "Find the fewest number of coins needed to make up a given amount.",
     "dsa_solution": "class Solution:\n    def coinChange(self, coins: List[int], amount: int) -> int:\n        dp = [amount + 1] * (amount + 1)\n        dp[0] = 0\n\n        for a in range(1, amount + 1):\n            for c in coins:\n                if a - c >= 0:\n                    dp[a] = min(dp[a], 1 + dp[a - c])\n        return dp[amount] if dp[amount] != amount + 1 else -1",
@@ -183,7 +183,7 @@
     "link": "https://leetcode.com/problems/coin-change"
   },
   {
-    "date": "2025-02-03",
+    "date": "2025-03-10",
     "title": "Word Break",
     "question": "Determine if a string can be segmented into a space-separated sequence of dictionary words.",
     "dsa_solution": "class Solution:\n    def wordBreak(self, s: str, wordDict: List[str]) -> bool:\n        n = len(s)\n        word_set = set(wordDict)\n        dp = [False] * (n + 1)\n        dp[0] = True\n\n        for i in range(1, n + 1):\n            for j in range(i):\n                if dp[j] and s[j:i] in word_set:\n                    dp[i] = True\n                    break\n        return dp[n]",
@@ -192,7 +192,7 @@
     "link": "https://leetcode.com/problems/word-break"
   },
   {
-    "date": "2025-02-04",
+    "date": "2025-03-11",
     "title": "Longest Increasing Subsequence",
     "question": "Find the length of the longest subsequence where elements are in increasing order.",
     "dsa_solution": "class Solution:\n    def lengthOfLIS(self, nums: List[int]) -> int:\n        LIS = [1] * len(nums)\n        \n        for i in range(len(nums) - 1, -1, -1):\n            for j in range(i + 1, len(nums)):\n                if nums[i] < nums[j]:\n                    LIS[i] = max(LIS[i], 1 + LIS[j])\n        \n        return max(LIS)",
@@ -201,7 +201,7 @@
     "link": "https://leetcode.com/problems/longest-increasing-subsequence"
   },
   {
-    "date": "2025-02-05",
+    "date": "2025-03-12",
     "title": "Partition Equal Subset Sum",
     "question": "Can the array be partitioned into two subsets with equal sum?",
     "dsa_solution": "class Solution:\n    def canPartition(self, nums: List[int]) -> bool:\n        total = sum(nums)\n        if total % 2 != 0:\n            return False\n        target = total // 2\n        dp = set()\n        dp.add(0)\n        \n        for num in nums:\n            nextDP = set()\n            for t in dp:\n                if t + num == target:\n                    return True\n                nextDP.add(t + num)\n                nextDP.add(t)\n            dp = nextDP\n        return target in dp",
@@ -210,7 +210,7 @@
     "link": "https://leetcode.com/problems/partition-equal-subset-sum"
   },
    {
-    "date": "2025-02-13",
+    "date": "2025-03-13",
     "title": "Best Time to Buy and Sell Stock",
     "question": "Find the maximum profit from buying and selling a stock given an array of prices.",
     "dsa_solution": "class Solution:\n    def maxProfit(self, prices: List[int]) -> int:\n        l, r = 0, 1\n        maxProfit = 0\n\n        while r < len(prices):\n            if prices[r] > prices[l]:\n                profit = prices[r] - prices[l]\n                maxProfit = max(maxProfit, profit)\n            else:\n                l = r\n            r += 1\n\n        return maxProfit",
@@ -226,7 +226,7 @@
     "link": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
   },
   {
-    "date": "2025-02-14",
+    "date": "2025-03-14",
     "title": "Longest Substring Without Repeating Characters",
     "question": "Find the length of the longest substring without repeating characters.",
     "dsa_solution": "class Solution:\n    def lengthOfLongestSubstring(self, s: str) -> int:\n        charSet = set()\n        l = 0\n        res = 0\n\n        for r in range(len(s)):\n            while s[r] in charSet:\n                charSet.remove(s[l])\n                l +=1\n            charSet.add(s[r])\n            res = max(res, len(charSet))\n        return res",
@@ -242,7 +242,7 @@
     "link": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
   },
   {
-    "date": "2025-02-15",
+    "date": "2025-03-15",
     "title": "Permutation in String",
     "question": "Check if one string's permutation is a substring of another string.",
     "dsa_solution": "class Solution:\n    def checkInclusion(self, s1: str, s2: str) -> bool:\n        n1, n2 = len(s1), len(s2)\n        if n1 > n2:\n            return False\n        s1Count, s2Count = {}, {}\n        for i in range(n1):\n            s1Count[s1[i]] = s1Count.get(s1[i], 0) + 1\n            s2Count[s2[i]] = s2Count.get(s2[i], 0) + 1\n        if s1Count == s2Count:\n            return True\n        for i in range(n1, n2):\n            new_char = s2[i]\n            s2Count[new_char] = s2Count.get(new_char, 0) + 1\n            old_char = s2[i - n1]\n            s2Count[old_char] -= 1\n            if s2Count[old_char] == 0:\n                del s2Count[old_char]\n            if s1Count == s2Count:\n                return True\n        return False",
@@ -258,7 +258,7 @@
     "link": "https://leetcode.com/problems/permutation-in-string/"
   },
   {
-    "date": "2025-02-16",
+    "date": "2025-03-16",
     "title": "Longest Repeating Character Replacement",
     "question": "Find the length of the longest substring where k replacements allow all characters to be the same.",
     "dsa_solution": "class Solution:\n    def characterReplacement(self, s: str, k: int) -> int:\n        count = {}\n        l = 0\n        res = 0\n        for r in range(len(s)):\n            count[s[r]] = count.get(s[r], 0) + 1\n            while (r - l + 1) - max(count.values()) > k:\n                count[s[l]] -= 1\n                l += 1\n            res = max(res, (r-l+1))\n        return res",
@@ -274,7 +274,7 @@
     "link": "https://leetcode.com/problems/longest-repeating-character-replacement/"
   },
   {
-    "date": "2025-02-17",
+    "date": "2025-03-17",
     "title": "Minimum Window Substring",
     "question": "Find the minimum substring in s that contains all characters of t.",
     "dsa_solution": "class Solution:\n    def minWindow(self, s: str, t: str) -> str:\n        if t == \"\": return \"\"\n        countT, window = {}, {}\n        for c in t:\n            countT[c] = countT.get(c, 0) + 1\n        have, need = 0, len(countT)\n        res, resLen = [-1, -1], float(\"inf\")\n        l = 0\n        for r in range(len(s)):\n            c = s[r]\n            window[c] = window.get(c, 0) + 1\n            if c in countT and window[c] == countT[c]:\n                have += 1\n            while have == need:\n                if (r - l + 1) < resLen:\n                    res = [l, r]\n                    resLen = (r - l + 1)\n                window[s[l]] -= 1\n                if s[l] in countT and window[s[l]] < countT[s[l]]:\n                    have -= 1\n                l += 1\n        l, r = res\n        return s[l:r+1] if resLen != float(\"inf\") else \"\"",
@@ -290,7 +290,7 @@
     "link": "https://leetcode.com/problems/minimum-window-substring/"
   },
   {
-    "date": "2025-02-18",
+    "date": "2025-03-18",
     "title": "Sliding Window Maximum",
     "question": "Find the maximum value in every window of size k in an array.",
     "dsa_solution": "class Solution:\n    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:\n        output = []\n        q = deque()\n        l = r = 0\n        while r < len(nums):\n            while q and nums[q[-1]] < nums[r]:\n                q.pop()\n            q.append(r)\n            if l > q[0]:\n                q.popleft()\n            if (r + 1) >= k:\n                output.append(nums[q[0]])\n                l += 1\n            r += 1\n        return output",
